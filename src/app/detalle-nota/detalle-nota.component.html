@@ -1,0 +1,33 @@
+<div class="animated fadeInRight">
+        <div class="content">
+            <div class="">
+                <div class="d-flex justify-content-between title-style mb-2 ">
+                    <h1 class="subtitle2 font-regular">Agregando Nota</h1>
+                    <button type="button" class="close" aria-label="Close" (click)="cerrar()">
+                        <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                      </button>
+                  </div>
+                  <form [formGroup]="formNotes">
+                 
+                    
+                  <input class="form-control form-control-lg" type="text" formControlName="title" placeholder="titulo">
+
+                  <div class="form-group">
+                        <label for="exampleFormControlTextarea1">Nota</label>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" formControlName="body" placeholder="nota" rows="3" ></textarea>
+                      </div>
+                      <div class="form-group">
+                      <input class="form-control form-control-sm" type="text" formControlName="author" placeholder="autor">
+                    </div>
+                    <div *ngIf="ver" class="form-group">
+                            <button type="button" class="btn btn-link" (click)="cerrar()">Cancelar</button>
+                          <button type="button" class="btn btn-primary" (click)="createComnando()">Guardar</button></div>
+                        </form>
+                        <div *ngIf="exito" class="alert alert-success" role="alert">
+                          This is a success alert—check it out!
+                        </div>
+                    </div>
+          </div>
+  
+      </div>
+      

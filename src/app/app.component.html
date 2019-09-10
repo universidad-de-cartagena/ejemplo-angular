@@ -1,0 +1,36 @@
+<div class="animated fadeInRight">
+  <div class="content">
+<div style="text-align:center">
+<h1>
+  Notas!
+</h1>
+</div>
+<div  class="card-columns">
+<div *ngFor="let note of notes">
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">{{note.title}}</h5>
+      <p class="card-text">{{note.body}}</p>
+      <p class="card-text"><small class="text-muted">{{note.author}}-{{note.created_at}}</small></p>
+      <button type="button" class="btn btn-link"(click)="verDetalle(note.uuid)">Ver mas</button>
+      <button class="btn" (click)="deleteNote(note.uuid)"><i class="fas fa-trash"></i></button>
+    </div>
+  </div>
+    
+</div>
+</div>
+
+<div class="off-canvas animacion" [ngClass]="{'hide': offCanvaI}">
+    <app-detalle-nota [idNotaExiste]="idNote" (dismiss)="dismiss()" ></app-detalle-nota>
+</div>
+<div [ngClass]="{'backdrop':  !offCanvaI }" (click)="offCanvaI=true"></div>
+
+<div class="btn-add">
+   
+    
+    <button class="btn" (click)="verDetalle()"><i style="color: #007bff" class="fas fa-3x fa-plus-circle"></i></button>  </div>
+   
+  
+<router-outlet></router-outlet>
+  </div>
+</div>

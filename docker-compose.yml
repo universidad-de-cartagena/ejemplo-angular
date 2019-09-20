@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  backend:
+    image: equipo01-frontend-angular:latest
+    build: .
+    ports:
+      - "80:80"

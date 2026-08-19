@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ejemplo-angular-env
+data:
+  ENVIRONMENT: "dev"
+  DEBUG: "true"
+  LOG_LEVEL: "debug"

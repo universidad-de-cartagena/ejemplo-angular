@@ -30,12 +30,11 @@
     "@opentelemetry/sdk-trace-base": "^1.19.0",
     "@opentelemetry/resources": "^1.19.0",
     "@opentelemetry/semantic-conventions": "^1.19.0",
-    "@opentelemetry/exporter-trace-otlp-grpc": "^0.45.0",
+    "@opentelemetry/exporter-trace-otlp-http": "^0.45.0",
     "@opentelemetry/context-zone": "^1.19.0",
     "@opentelemetry/propagator-b3": "^1.19.0",
     "@opentelemetry/instrumentation-fetch": "^0.45.0",
     "@opentelemetry/instrumentation-xml-http-request": "^0.45.0",
-    "@opentelemetry/instrumentation-angular": "^0.16.0",
     "@opentelemetry/instrumentation": "^0.45.0"
   },
   "devDependencies": {

@@ -44,10 +44,13 @@ build:
 
 test:
   stage: test
-  image: node:18-alpine
+  image: node:12
+  before_script:
+    - apt-get update && apt-get install -y --no-install-recommends chromium
+    - export CHROME_BIN=$(which chromium)
   script:
     - npm install --legacy-peer-deps
-    - npx ng test --watch=false --browsers=ChromeHeadless || true
+    - npx ng test --watch=false --browsers=ChromeHeadless
   rules:
     - if: $CI_MERGE_REQUEST_ID
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
@@ -56,7 +59,7 @@ deploy-staging:
   stage: deploy
   image: alpine/helm:3.14
   script:
-    - helm upgrade --install ejemplo-angular-staging helm/ejemplo-angular/ --namespace staging --set image.repository=${CI_REGISTRY_IMAGE} --set image.tag=${CI_COMMIT_SHORT_SHA} --wait --timeout 5m
+    - helm upgrade --install ejemplo-angular-staging helm/ejemplo-angular/ --namespace staging --create-namespace --set image.repository=${CI_REGISTRY_IMAGE} --set image.tag=${CI_COMMIT_SHORT_SHA} --wait --timeout 5m
   environment:
     name: staging
   rules:
@@ -67,7 +70,7 @@ deploy-production:
   stage: deploy
   image: alpine/helm:3.14
   script:
-    - helm upgrade --install ejemplo-angular-production helm/ejemplo-angular/ --namespace production --set image.repository=${CI_REGISTRY_IMAGE} --set image.tag=${CI_COMMIT_SHORT_SHA} --wait --timeout 5m
+    - helm upgrade --install ejemplo-angular-production helm/ejemplo-angular/ --namespace production --create-namespace --set image.repository=${CI_REGISTRY_IMAGE} --set image.tag=${CI_COMMIT_SHORT_SHA} --wait --timeout 5m
   environment:
     name: production
   rules:

@@ -9,20 +9,19 @@
 
 import { WebTracerProvider } from '@opentelemetry/sdk-trace-web';
 import { BatchSpanProcessor } from '@opentelemetry/sdk-trace-base';
-import { OTLPTraceExporter } from '@opentelemetry/exporter-trace-otlp-grpc';
+import { OTLPTraceExporter } from '@opentelemetry/exporter-trace-otlp-http';
 import { Resource } from '@opentelemetry/resources';
 import { ATTR_SERVICE_NAME, ATTR_SERVICE_VERSION, ATTR_DEPLOYMENT_ENVIRONMENT } from '@opentelemetry/semantic-conventions';
 import { ZoneContextManager } from '@opentelemetry/context-zone';
 import { B3Propagator } from '@opentelemetry/propagator-b3';
 import { FetchInstrumentation } from '@opentelemetry/instrumentation-fetch';
 import { XMLHttpRequestInstrumentation } from '@opentelemetry/instrumentation-xml-http-request';
-import { AngularInstrumentation } from '@opentelemetry/instrumentation-angular';
 import { registerInstrumentations } from '@opentelemetry/instrumentation';
 
 const serviceName = 'ejemplo-angular';
 const serviceVersion = '1.0.0';
-const environment = 'development';
-const otlpEndpoint = 'http://localhost:4317';
+const environment = (window as any).__OTEL_ENVIRONMENT__ || 'development';
+const otlpEndpoint = (window as any).__OTEL_ENDPOINT__ || 'http://localhost:4317';
 
 const resource = new Resource({
   [ATTR_SERVICE_NAME]: serviceName,
@@ -45,12 +44,11 @@ provider.register({
 registerInstrumentations({
   instrumentations: [
     new FetchInstrumentation({
-      propagateTraceHeaderCorsUrls: [/.*/],
+      propagateTraceHeaderCorsUrls: [/localhost/],
     }),
     new XMLHttpRequestInstrumentation({
-      propagateTraceHeaderCorsUrls: [/.*/],
+      propagateTraceHeaderCorsUrls: [/localhost/],
     }),
-    new AngularInstrumentation(),
   ],
 });
 

@@ -1,10 +1,8 @@
 /**
  * OpenTelemetry browser SDK setup for Angular application.
  *
- * Import in main.ts before bootstrapApplication():
+ * Import in main.ts before platformBrowserDynamic().bootstrapModule():
  *   import './observability/otel-config';
- *
- * Or add to angular.json polyfills array.
  */
 
 import { WebTracerProvider } from '@opentelemetry/sdk-trace-web';

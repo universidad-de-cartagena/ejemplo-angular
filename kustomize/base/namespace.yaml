@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: ejemplo-angular
+  labels:
+    app.kubernetes.io/name: ejemplo-angular
+    app.kubernetes.io/part-of: ejemplo-apps
